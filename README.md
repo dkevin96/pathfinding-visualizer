@@ -2,11 +2,20 @@
 
 An interactive web application that helps users visualize search algorithms in a grid environment.
 
-[Click here to try out the current deployed version]()
+[Click here to try out the current deployed version](https://pathfinding-visualizer-kevin.netlify.app)
 
-## Available Scripts
+## :ledger: Index
+- [Built With](#Built With)
+- [About](#beginner-out)
 
-In the project directory, you can run:
+
+##  :beginner: out
+
+## Built With
+* [Create React App](https://create-react-app.dev/)
+* [React JS](https://reactjs.org/)
+* [React Redux](https://react-redux.js.org/)
+* [Semantic UI React](https://react.semantic-ui.com/)
 
 ### `yarn start`
 
