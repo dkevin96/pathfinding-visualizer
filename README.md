@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Pathfinding Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive web application that helps users visualize search algorithms in a grid environment.
+
+[Click here to try out the current deployed version]()
 
 ## Available Scripts
 
