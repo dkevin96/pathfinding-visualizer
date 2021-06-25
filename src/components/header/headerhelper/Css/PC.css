@@ -1,0 +1,166 @@
+:root {
+  --nav-text-color: rgb(238, 224, 209);
+  --navbar-color: #34495e;
+
+  --button-enable-color: rgb(237, 247, 233);
+  --button-enable-text-color: rgb(116, 181, 88);
+  --button-disable-color: rgb(252, 233, 232);
+  --button-disable-text-color: rgb(216, 117, 128);
+
+  --dropdown-background: rgb(243, 239, 235);
+  --dropdown-color: rgb(238, 222, 206);
+  --select-color: rgb(163, 70, 81);
+
+  --background: rgba(255, 255, 255, 1);
+  --text-color: rgb(52, 73, 94);
+  --banned-color: #800000;
+  --enable-color: rgb(158, 210, 169);
+  --diable-color: rgb(242, 190, 195);
+}
+
+.BootstrapSwitchButton {
+  margin: auto;
+}
+
+.banned {
+  color: var(--banned-color);
+  text-decoration: line-through;
+}
+
+.buttonEnable {
+  background-color: var(--button-enable-color);
+  color: var(--button-enable-text-color);
+  font-size: 1.3vw;
+  border: none;
+  border-radius: 1vw;
+  display: block;
+  padding: 0.7vw;
+}
+
+.buttonEnable:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+.buttonDisable {
+  background-color: var(--button-disable-color);
+  color: var(--button-disable-text-color);
+  font-size: 1.3vw;
+  border: none;
+  border-radius: 1vw;
+  display: block;
+  padding: 0.7vw;
+}
+
+.buttonDisable:focus {
+  outline: none !important;
+  border: none !important;
+}
+
+#mainInfo > ul li {
+  font-family: "Righteous", cursive;
+  display: inline-block;
+  list-style: none;
+  font-size: 1vw;
+  margin-top: 0.5em;
+  padding: 0 1vw 0 0;
+}
+
+#mainInfo > ul li > div {
+  width: 1.4vw;
+  height: 1.4vw;
+  display: inline-block;
+  position: relative;
+  top: 0.3em;
+  margin: 0 0.1em;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.Info-Start-Node {
+  background-image: url("../../../../Resources/Images/Info/StartNode.png");
+}
+
+.Info-End-Node {
+  background-image: url("../../../../Resources/Images/Info/EndNode.png");
+}
+
+.Info-Unvisited-Node {
+  border: 1px solid rgb(175, 216, 248);
+  background-color: white;
+}
+
+.Info-Visited-Node {
+  background-image: url("../../../../Resources/Images/Info/VisitedNode1.png");
+}
+
+.Info-ShortestPathNode-Node {
+  background-image: url("../../../../Resources/Images/Info/ShortestPathNode.png");
+}
+
+.Info-WallNode-Node {
+  background-image: url("../../../../Resources/Images/Info/WallNode.png");
+}
+
+#algorithmDescriptor {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  color: var(--text-color);
+  font-size: 1.5vw;
+  margin-top: 2%;
+}
+
+#algorithmDescriptor > b {
+  color: var(--select-color);
+}
+
+#algorithmDescriptor > i {
+  font-weight: 700;
+}
+
+.navbar {
+  background-color: var(--navbar-color);
+}
+
+.navbar-logo {
+  font-family: "Righteous", cursive;
+  font-size: 2vw !important;
+  color: var(--nav-text-color) !important;
+}
+
+.nav-bar {
+  width: 100%;
+  font-family: "Righteous", cursive;
+}
+
+.nav-item {
+  margin: auto;
+  font-size: 1.3vw;
+}
+
+/* https://stackoverflow.com/questions/64196389/dark-dropdown-items-in-react-bootstrap */
+.nav-item .dropdown-menu {
+  background: var(--dropdown-background);
+}
+
+.nav-item .dropdown-item.active {
+  background-color: var(--dropdown-color);
+  color: var(--select-color);
+}
+
+.nav-item .dropdown-item:hover {
+  background: var(--dropdown-color);
+}
+
+.nav-link-default {
+  color: var(--nav-text-color) !important;
+}
+
+.nav-link-green {
+  color: var(--enable-color) !important;
+}
+
+.nav-link-red {
+  color: var(--diable-color) !important;
+}

@@ -1,13 +1,311 @@
+:root {
+  /* board color */
+
+  --wall: #15313f;
+  --wall-animation-0: #15313f;
+  --wall-animation-25: #15313f;
+  --wall-animation-50: #15313f;
+  --wall-animation-100: #15313f;
+
+  --search: rgba(0, 190, 218, 0.75);
+  --search-animation-0: rgba(0, 0, 66, 0.75);
+  --search-animation-25: rgba(17, 104, 217, 0.75);
+  --search-animation-50: rgba(0, 217, 159, 0.75);
+  --search-animation-100: rgba(0, 190, 218, 0.75);
+
+  --path: rgb(255, 254, 106);
+  --path-animation-0: #fcd7c0;
+  --path-animation-25: #e63f00;
+  --path-animation-50: #facf5a;
+  --path-animation-100: rgb(255, 254, 106);
+
+  --nav-text-color: rgb(238, 224, 209);
+  --navbar-color: rgb(146, 111, 79);
+
+  --button-enable-color: rgb(237, 247, 233);
+  --button-enable-text-color: rgb(116, 181, 88);
+  --button-disable-color: rgb(252, 233, 232);
+  --button-disable-text-color: rgb(216, 117, 128);
+
+  --dropdown-background: rgb(243, 239, 235);
+  --dropdown-color: rgb(238, 222, 206);
+  --select-color: rgb(163, 70, 81);
+
+  --background: rgba(255, 255, 255, 1);
+  --text-color: rgb(52, 73, 94);
+  --banned-color: #800000;
+  --enable-color: rgb(158, 210, 169);
+  --diable-color: rgb(242, 190, 195);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Righteous", cursive, "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.App {
+  text-align: center;
+  background-color: var(--background);
+  min-height: 100vh;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.footer a {
+  color: black;
+  text-decoration: none;
+}
+/*---------dynamic---------*/
+.tablePadding {
+  padding: 10px 10px;
+}
+
+.start {
+  background: var(--background) url("./Resources/Images/Info/StartNode.png");
+  /* background-color: green; */
+  background-position: center;
+  background-size: cover;
+  animation-name: startAnimation;
+  animation-duration: 3s;
+}
+
+.startSearch {
+  background: var(--search) url("./Resources/Images/Info/StartNode.png");
+  /* background-color: green; */
+  background-position: center;
+  background-size: cover;
+  animation-name: startSearchAnimation;
+  animation-duration: 3s;
+}
+
+.startPath {
+  background: var(--path) url("./Resources/Images/Info/StartNode.png");
+  /* background-color: green; */
+  background-position: center;
+  background-size: cover;
+  animation-name: startPathAnimation;
+  animation-duration: 3s;
+  border: 0;
+}
+
+@keyframes startAnimation {
+  0% {
+    transform: scale(0.5, 0.5);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes startSearchAnimation {
+  0% {
+    transform: scale(0.5, 0.5);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes startPathAnimation {
+  0% {
+    transform: scale(0.5, 0.5);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+}
+
+.end {
+  background: var(--background) url("./Resources/Images/Info/EndNode.png");
+  /* background-color: red; */
+  background-position: center;
+  background-size: cover;
+  animation-name: endAnimation;
+  animation-duration: 3s;
+}
+
+.endSearch {
+  background: var(--search) url("./Resources/Images/Info/EndNode.png");
+  /* background-color: red; */
+  background-position: center;
+  background-size: cover;
+  animation-name: endSearchAnimation;
+  animation-duration: 3s;
+}
+
+.endPath {
+  background: var(--path) url("./Resources/Images/Info/EndNode.png");
+  /* background-color: red; */
+  background-position: center;
+  background-size: cover;
+  animation-name: endPathAnimation;
+  animation-duration: 3s;
+  border: 0;
+}
+
+@keyframes endAnimation {
+  0% {
+    transform: scale(0.5, 0.5);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes endSearchAnimation {
+  0% {
+    transform: scale(0.5, 0.5);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes endPathAnimation {
+  0% {
+    transform: scale(0.5, 0.5);
+  }
+  25% {
+    transform: scale(1, 1);
+  }
+}
+
+/*----------static-----------*/
+
+.searchStatic {
+  background-color: var(--search);
+}
+
+.pathStatic {
+  background-color: var(--path);
+  border: 0;
+}
+
+/*----------------------------*/
+
+.background {
+  background-color: var(--background);
+  border: 0.5px solid rgb(175, 216, 248);
+}
+
+.wall {
+  background-color: var(--wall);
+  animation-name: wallAnimation;
+  animation-duration: 0.5s;
+  border: 0;
+}
+
+@keyframes wallAnimation {
+  0% {
+    background-color: var(--wall-animation-0);
+    transform: scale(0, 0);
+  }
+  25% {
+    background-color: var(--wall-animation-25);
+    transform: scale(0.5, 0.5);
+  }
+  50% {
+    background-color: var(--wall-animation-50);
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    background-color: var(--wall-animation-100);
+    transform: scale(1, 1);
+  }
+}
+
+.search {
+  background-color: var(--search);
+  animation-name: searchAnimation;
+  animation-duration: 0.5s;
+}
+
+@keyframes searchAnimation {
+  0% {
+    background-color: var(--search-animation-0);
+    border-radius: 50%;
+  }
+  25% {
+    background-color: var(--search-animation-25);
+    border-radius: 80%;
+  }
+  50% {
+    background-color: var(--search-animation-50);
+    border-radius: 90%;
+  }
+  100% {
+    background-color: var(--search-animation-100);
+    border-radius: 100%;
+  }
+}
+
+.path {
+  background-color: var(--path);
+  animation-name: pathAnimation;
+  animation-duration: 0.5s;
+  border: 0;
+}
+
+@keyframes pathAnimation {
+  0% {
+    background-color: var(--path-animation-0);
+    transform: scale(0.8, 0.8);
+  }
+  25% {
+    background-color: var(--path-animation-25);
+    transform: scale(0.3, 0.3);
+  }
+  50% {
+    background-color: var(--path-animation-50);
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    background-color: var(--path-animation-100);
+    transform: scale(1, 1);
+  }
+}
+
+.pathHeadLeft {
+  background: var(--path) url("./Resources/Images/Info/PathHead.png");
+  /* background-color: red; */
+  background-position: center;
+  background-size: cover;
+  transform: rotate(-90deg);
+  border: 0;
+}
+
+.pathHeadRight {
+  background: var(--path) url("./Resources/Images/Info/PathHead.png");
+  /* background-color: red; */
+  background-position: center;
+  background-size: cover;
+  transform: rotate(90deg);
+  border: 0;
+}
+
+.pathHeadUp {
+  background: var(--path) url("./Resources/Images/Info/PathHead.png");
+  /* background-color: red; */
+  background-position: center;
+  background-size: cover;
+  border: 0;
+}
+
+.pathHeadDown {
+  background: var(--path) url("./Resources/Images/Info/PathHead.png");
+  /* background-color: red; */
+  background-position: center;
+  background-size: cover;
+  transform: rotate(180deg);
+  border: 0;
 }
