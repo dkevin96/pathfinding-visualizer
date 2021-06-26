@@ -1,10 +1,21 @@
-# Getting Started with Create React App
+# Pathfinding Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive web application that helps users visualize search algorithms in a grid environment.
 
-## Available Scripts
+[Click here to try out the current deployed version](https://pathfinding-visualizer-kevin.netlify.app)
 
-In the project directory, you can run:
+## :ledger: Index
+- [Built With](#Built With)
+- [About](#beginner-out)
+
+
+##  :beginner: out
+
+## Built With
+* [Create React App](https://create-react-app.dev/)
+* [React JS](https://reactjs.org/)
+* [React Redux](https://react-redux.js.org/)
+* [Semantic UI React](https://react.semantic-ui.com/)
 
 ### `yarn start`
 
