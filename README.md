@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1ca7265a-40c3-456e-878a-5e995ca193e8/deploy-status)](https://app.netlify.com/sites/pathfinding-visualizer-kevin/deploys)
 # Pathfinding Visualizer
 
 An interactive web application that helps users visualize search algorithms in a grid environment.
