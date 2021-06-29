@@ -10,6 +10,7 @@ import {
 import ButtonEvent from "../../../table/tablehelper/ButtonEvent";
 import { stopStatus } from "../../../table/tablehelper/Animation";
 import Dijkstra from "../../../../algorithms/Dijkstra";
+import DFS from "../../../../algorithms/DFS";
 
 const NavButton = () => {
   const [buttonName, setButtonName] = useState("Visualize !");
@@ -33,6 +34,9 @@ const NavButton = () => {
         case "Algorithm_Dijkstra":
           name = "Dijkstra's";
           break;
+        case "Algorithm_Depth_First":
+          name = "DFS";
+          break;
         default:
           name = "";
           break;
@@ -51,6 +55,12 @@ const NavButton = () => {
     }
   }, [sysStatus.get]);
 
+  // use to call clearpath when change algorithment
+  const callback = (func1, func2) => {
+    func1();
+    func2();
+  };
+
   const handler = () => {
     //Change system state
     if (sysStatus.get === "RUNNING") {
@@ -66,13 +76,21 @@ const NavButton = () => {
     if (algoContext.get === "") {
       setButtonName("Pick an Algorithm");
     } else {
-      switch (algoContext.get) {
-        case "Algorithm_Dijkstra":
-          Dijkstra("Dijkstra", buttonEvent.Start, speed.get[1]);
-          break;
-        default:
-          break;
-      }
+      callback(
+        () => buttonEvent.ClearPath(),
+        () => {
+          switch (algoContext.get) {
+            case "Algorithm_Dijkstra":
+              Dijkstra("Dijkstra", buttonEvent.Start, speed.get[1]);
+              break;
+            case "Algorithm_Depth_First":
+              DFS(buttonEvent.Start, speed.get[1]);
+              break;
+            default:
+              break;
+          }
+        }
+      );
     }
   };
 

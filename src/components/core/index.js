@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  tableVar,
-  adjust,
-} from "../table/tablehelper/TableIndex";
+import { tableVar, adjust } from "../table/tablehelper/TableIndex";
 
 // component position
 export var position = {
@@ -75,6 +72,10 @@ export const algorithmReducer = (state, action) => {
   switch (action) {
     case "Algorithm_Dijkstra":
       return "Algorithm_Dijkstra";
+    case "Algorithm_Breadth_First":
+      return "Algorithm_Breadth_First";
+    case "Algorithm_Depth_First":
+      return "Algorithm_Depth_First";
     default:
       return initialAlgorithm;
   }

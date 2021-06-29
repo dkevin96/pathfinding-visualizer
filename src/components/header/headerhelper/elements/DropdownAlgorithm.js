@@ -19,6 +19,10 @@ function DropdownAlgorithm() {
       case "Algorithm_Dijkstra":
         algoContext.set("Algorithm_Dijkstra");
         break;
+      case "Algorithm_Depth_First":
+        buttonEvent.ClearPath(false);
+        algoContext.set("Algorithm_Depth_First");
+        break;
 
       default:
         break;
@@ -37,6 +41,9 @@ function DropdownAlgorithm() {
       >
         <NavDropdown.Item eventKey="Algorithm_Dijkstra">
           Dijkstra's Algorithm
+        </NavDropdown.Item>
+        <NavDropdown.Item eventKey="Algorithm_Depth_First">
+          Depth-First Search
         </NavDropdown.Item>
       </NavDropdown>
     </Nav.Item>
