@@ -7,23 +7,8 @@ function DFS(startCallback, speed) {
 
   // dfs go from bottom-up to find the shortest path
   // [x,y] = [position.start[0],position.start[0]]
-  function DoDFS(
-    x,
-    y,
-    endPos,
-    visited,
-    retSearchPath,
-    retShortestPath,
-    retDirection
-  ) {
-    if (
-      x < 0 ||
-      y < 0 ||
-      x >= position.rowSize ||
-      y >= position.colSize ||
-      [x, y] in position.wall ||
-      visited.has([x, y].toString())
-    ) {
+  function DoDFS(x, y, endPos, visited, retSearchPath, retShortestPath, retDirection) {
+    if (x < 0 || y < 0 || x >= position.rowSize || y >= position.colSize || [x, y] in position.wall || visited.has([x, y].toString())) {
       return false;
     }
 
@@ -37,65 +22,25 @@ function DFS(startCallback, speed) {
 
     // direction up right down left
     // up all the way, then right all the way, then down all the way, then left 1 turn, then up all the way,...
-    if (
-      DoDFS(
-        x - 1,
-        y,
-        endPos,
-        visited,
-        retSearchPath,
-        retShortestPath,
-        retDirection
-      )
-    ) {
+    if (DoDFS(x - 1, y, endPos, visited, retSearchPath, retShortestPath, retDirection)) {
       // up
       retShortestPath.unshift([x, y]);
       retDirection.unshift("up");
       return true;
     }
-    if (
-      DoDFS(
-        x,
-        y + 1,
-        endPos,
-        visited,
-        retSearchPath,
-        retShortestPath,
-        retDirection
-      )
-    ) {
+    if (DoDFS(x, y + 1, endPos, visited, retSearchPath, retShortestPath, retDirection)) {
       // right
       retShortestPath.unshift([x, y]);
       retDirection.unshift("right");
       return true;
     }
-    if (
-      DoDFS(
-        x + 1,
-        y,
-        endPos,
-        visited,
-        retSearchPath,
-        retShortestPath,
-        retDirection
-      )
-    ) {
+    if (DoDFS(x + 1, y, endPos, visited, retSearchPath, retShortestPath, retDirection)) {
       // down
       retShortestPath.unshift([x, y]);
       retDirection.unshift("down");
       return true;
     }
-    if (
-      DoDFS(
-        x,
-        y - 1,
-        endPos,
-        visited,
-        retSearchPath,
-        retShortestPath,
-        retDirection
-      )
-    ) {
+    if (DoDFS(x, y - 1, endPos, visited, retSearchPath, retShortestPath, retDirection)) {
       // left
       retShortestPath.unshift([x, y]);
       retDirection.unshift("left");
@@ -108,15 +53,7 @@ function DFS(startCallback, speed) {
   var start = position.start;
 
   console.log("DFS");
-  DoDFS(
-    start[0],
-    start[1],
-    position.end,
-    visited,
-    retSearchPath,
-    retShortestPath,
-    retDirection
-  );
+  DoDFS(start[0], start[1], position.end, visited, retSearchPath, retShortestPath, retDirection);
 
   // When bottom up, the tail is not sure of the direction, so now add the direction
   retDirection.unshift(retDirection[0]); //  Change the direction to find the method, move forward one square
