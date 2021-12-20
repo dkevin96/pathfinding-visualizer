@@ -200,8 +200,8 @@ code {
 
 .wall {
   background-color: var(--wall);
-  animation-name: wallAnimation;
-  animation-duration: 0.5s;
+  /* animation-name: wallAnimation;
+  animation-duration: 0.5s; */
   border: 0;
 }
 
