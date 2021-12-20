@@ -49,44 +49,44 @@ export class Distance {
       let dir = null;
 
       // up
-      if ([x - 1, y] in this.dict && !visited.has([x - 1, y]).toString()) {
-        if (this.dict[(x - 1, y)] < curD) {
+      if ([x - 1, y] in this.dict && !visited.has([x - 1, y].toString())) {
+        if (this.dict[[x - 1, y]] < curD) {
           curX = x - 1;
           curY = y;
-          curD = this.dict[(x - 1, y)];
+          curD = this.dict[[x - 1, y]];
           dir = "down";
         }
         visited.add([x - 1, y].toString());
       }
 
       // down
-      if ([x + 1, y] in this.dict && !visited.has([x + 1, y]).toString()) {
-        if (this.dict[(x + 1, y)] < curD) {
+      if ([x + 1, y] in this.dict && !visited.has([x + 1, y].toString())) {
+        if (this.dict[[x + 1, y]] < curD) {
           curX = x + 1;
           curY = y;
-          curD = this.dict[(x + 1, y)];
+          curD = this.dict[[x + 1, y]];
           dir = "up";
         }
         visited.add([x + 1, y].toString());
       }
 
       // left
-      if ([x, y - 1] in this.dict && !visited.has([x, y - 1]).toString()) {
-        if (this.dict[(x, y - 1)] < curD) {
+      if ([x, y - 1] in this.dict && !visited.has([x, y - 1].toString())) {
+        if (this.dict[[x, y - 1]] < curD) {
           curX = x;
           curY = y - 1;
-          curD = this.dict[(x, y - 1)];
+          curD = this.dict[[x, y - 1]];
           dir = "right";
         }
         visited.add([x, y - 1].toString());
       }
 
       // right
-      if ([x, y + 1] in this.dict && !visited.has([x, y + 1]).toString()) {
-        if (this.dict[(x, y + 1)] < curD) {
+      if ([x, y + 1] in this.dict && !visited.has([x, y + 1].toString())) {
+        if (this.dict[[x, y + 1]] < curD) {
           curX = x;
           curY = y + 1;
-          curD = this.dict[(x, y + 1)];
+          curD = this.dict[[x, y + 1]];
           dir = "left";
         }
         visited.add([x, y + 1].toString());

@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import Nav from "react-bootstrap/Nav";
 
-import {
-  algorithmContext,
-  sysStatusContext,
-  speedContext,
-  animationStatusContext,
-} from "../../../core/index";
+import { algorithmContext, sysStatusContext, speedContext, animationStatusContext } from "../../../core/index";
 import ButtonEvent from "../../../table/tablehelper/ButtonEvent";
 import { stopStatus } from "../../../table/tablehelper/Animation";
 import Dijkstra from "../../../../algorithms/Dijkstra";
 import DFS from "../../../../algorithms/DFS";
+import { BFS } from "../../../../algorithms/BFS";
 
 const NavButton = () => {
   const [buttonName, setButtonName] = useState("Visualize !");
@@ -36,6 +32,9 @@ const NavButton = () => {
           break;
         case "Algorithm_Depth_First":
           name = "DFS";
+          break;
+        case "Algorithm_Breadth_First":
+          name = "BFS";
           break;
         default:
           name = "";
@@ -85,6 +84,10 @@ const NavButton = () => {
               break;
             case "Algorithm_Depth_First":
               DFS(buttonEvent.Start, speed.get[1]);
+              break;
+            case "Algorithm_Breadth_First":
+              console.log("Staring Bfs");
+              BFS(buttonEvent.Start, speed.get[1]);
               break;
             default:
               break;

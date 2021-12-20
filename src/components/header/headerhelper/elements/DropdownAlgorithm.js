@@ -23,6 +23,10 @@ function DropdownAlgorithm() {
         buttonEvent.ClearPath(false);
         algoContext.set("Algorithm_Depth_First");
         break;
+      case "Algorithm_Breadth_First":
+        buttonEvent.ClearPath(false);
+        algoContext.set("Algorithm_Breadth_First");
+        break;
 
       default:
         break;
@@ -39,12 +43,9 @@ function DropdownAlgorithm() {
         onMouseEnter={toggleHandler}
         onMouseLeave={toggleHandler}
       >
-        <NavDropdown.Item eventKey="Algorithm_Dijkstra">
-          Dijkstra's Algorithm
-        </NavDropdown.Item>
-        <NavDropdown.Item eventKey="Algorithm_Depth_First">
-          Depth-First Search
-        </NavDropdown.Item>
+        <NavDropdown.Item eventKey="Algorithm_Dijkstra">Dijkstra's Algorithm</NavDropdown.Item>
+        <NavDropdown.Item eventKey="Algorithm_Depth_First">Depth-First Search</NavDropdown.Item>
+        <NavDropdown.Item eventKey="Algorithm_Breadth_First">Breadth-First Search</NavDropdown.Item>
       </NavDropdown>
     </Nav.Item>
   );
