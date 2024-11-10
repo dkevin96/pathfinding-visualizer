@@ -32,10 +32,7 @@ export const originPos = {
     adjust(Math.floor(tableVar.rowSize / 2)), // rowsize in this case is 19
     adjust(Math.floor(tableVar.colSize / 4)), // columnSize in this case is 63
   ],
-  origin_end: [
-    adjust(Math.floor(tableVar.rowSize / 2)),
-    adjust(tableVar.colSize - Math.floor(tableVar.colSize / 4)),
-  ],
+  origin_end: [adjust(Math.floor(tableVar.rowSize / 2)), adjust(tableVar.colSize - Math.floor(tableVar.colSize / 4))],
 };
 
 // All Css
@@ -55,7 +52,7 @@ export const componentKind = {
 
   search: "search",
   path: "path",
-  
+
   /*----------static-----------*/
   searchStatic: "searchStatic",
   pathStatic: "pathStatic",
@@ -66,7 +63,7 @@ export const componentKind = {
   pathHeadRight: "pathHeadRight",
   pathHeadUp: "pathHeadUp",
   pathHeadDown: "pathHeadDown",
-  
+
   background: "background",
 };
 

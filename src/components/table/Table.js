@@ -11,6 +11,11 @@ function Table() {
     setTimeout(() => {
       sysStatus.set("IDLE");
     }, 1000);
+
+    // clear timeout
+    return () => {
+      clearTimeout();
+    }
   }, []);
 
   if (sysStatus.get === "LOADING") {

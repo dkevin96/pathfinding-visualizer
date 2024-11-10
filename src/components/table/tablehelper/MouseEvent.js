@@ -1,20 +1,7 @@
 import { useContext, useEffect } from "react";
-import {
-  sysStatusContext,
-  algorithmContext,
-  speedContext,
-  animationStatusContext,
-} from "../../core/index";
+import { sysStatusContext, algorithmContext, speedContext, animationStatusContext } from "../../core/index";
 
-import {
-  tableVar,
-  touchContext,
-  moveContext,
-  updateContext,
-  componentKind,
-  keyboardSupport,
-  synchronize,
-} from "./TableIndex";
+import { tableVar, touchContext, moveContext, updateContext, componentKind, keyboardSupport, synchronize } from "./TableIndex";
 import { setTable } from "./SetTable";
 import { UpdateTable } from "./UpdateTable";
 import { WhichComponent } from "./WhichComp";
@@ -27,11 +14,7 @@ function MouseEvent() {
     useContext(updateContext),
     useContext(animationStatusContext),
   ];
-  const [algorithm, speed, sysStatus] = [
-    useContext(algorithmContext),
-    useContext(speedContext),
-    useContext(sysStatusContext),
-  ];
+  const [algorithm, speed, sysStatus] = [useContext(algorithmContext), useContext(speedContext), useContext(sysStatusContext)];
 
   const buttonEvent = ButtonEvent();
 
@@ -49,11 +32,8 @@ function MouseEvent() {
   };
 
   const MouseDownHandler = (e) => {
-    // console.log("MouseDownHandler " + e.target.id)
-    if (
-      (sysStatus.get !== "IDLE" && sysStatus.get !== "STOP") ||
-      componentKind.add === false
-    ) {
+    console.log("MouseDownHandler " + e.target.id);
+    if ((sysStatus.get !== "IDLE" && sysStatus.get !== "STOP") || componentKind.add === false) {
       // sysStatus = "IDLE" & "STOP" lock Mouse
       return;
     }
@@ -77,10 +57,7 @@ function MouseEvent() {
   const MouseUpHandler = (e) => {
     // console.log("MouseUpHandler " + e.target.id)
 
-    if (
-      (sysStatus.get !== "IDLE" && sysStatus.get !== "STOP") ||
-      componentKind.add === false
-    ) {
+    if ((sysStatus.get !== "IDLE" && sysStatus.get !== "STOP") || componentKind.add === false) {
       // sysStatus = "IDLE" & "STOP" lock Mouse
       return;
     }
@@ -88,18 +65,14 @@ function MouseEvent() {
     move.set("");
 
     if (update.get && move.get !== "") {
-      
       UpdateTable(buttonEvent.Start, buttonEvent.ClearPath, algorithm, speed);
     }
   };
 
   const OnMouseEnterHanlder = (e) => {
-    // console.log("OnMouseEnterHanlder " + e.target.id)
+    console.log("OnMouseEnterHanlder " + e.target.id);
 
-    if (
-      (sysStatus.get !== "IDLE" && sysStatus.get !== "STOP") ||
-      componentKind.add === false
-    ) {
+    if ((sysStatus.get !== "IDLE" && sysStatus.get !== "STOP") || componentKind.add === false) {
       // sysStatus = "IDLE" & "STOP" lock Mouse
       return;
     }
@@ -111,6 +84,7 @@ function MouseEvent() {
     // console.log(whichOldComponent)
     // console.log(whichNewComponent)
     if (move.get === componentKind.add && whichNewComponent.type) {
+      console.log("wall", whichNewComponent);
       // If you add a wall , you don’t need to clear the object with the old id
       setTable(tableVar.newId, whichNewComponent.rKind, true);
       tableVar.id = parseInt(tableVar.newId);

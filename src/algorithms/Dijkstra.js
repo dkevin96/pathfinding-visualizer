@@ -6,15 +6,8 @@ function Dijkstra(whichAlgo, startCallback, speed) {
   var retShortestPath = [];
   var retDirection = [];
 
-  retShortestPath = retShortestPath.concat(
-    DoDijkstra(
-      whichAlgo,
-      position.start,
-      position.end,
-      retSearchPath,
-      retDirection
-    )
-  );
+  // all the arrays are updated in the callback function, which allow the animation (painting) to be executed
+  retShortestPath = retShortestPath.concat(DoDijkstra(whichAlgo, position.start, position.end, retSearchPath, retDirection));
 
   // Execute start animation
   startCallback(retSearchPath, retShortestPath, retDirection, speed);
@@ -32,6 +25,7 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
 
   // Set table: starting point is 0, others are infinite, all previous vertex are null
   // Set the current shortest path queue
+  // table[0] starts from start, table[1] starts from end (only for bidirectional swarm algorithm)
   var table = [{}, {}];
   var i, j;
   for (i = 0; i < position.rowSize; i++) {
@@ -61,13 +55,13 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
 
   /* Algorithm begins */
   var curShortestPath = [];
-  var which = 1; // 0 for start, 1 for end
+  var which = 0; // 0 for start, 1 for end
   var actualEnd = null;
   var isFoundEnd = false;
   var visited = [new Set(), new Set()]; // [0]: start, [1]: end
 
   while (unvisited[0].Length() > 0 || unvisited[1].Length() > 0) {
-    // Choose which way to go
+    // Choose which way to go, for Bidrectional Swarm Algorithm
     if (unvisited[0].Length() > 0 && unvisited[1].Length() > 0) {
       which = (which + 1) % 2;
     } else if (unvisited[0].Length() > 0) {
@@ -87,17 +81,15 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
     // 2. Calculate the points that are adjacent and have not been traversed
     // curPos: [row, column, pos]
     var up = curPos[0] - 1 >= 0 ? [curPos[0] - 1, curPos[1]] : null;
-    var right =
-      curPos[1] + 1 < position.colSize ? [curPos[0], curPos[1] + 1] : null;
-    var down =
-      curPos[0] + 1 < position.rowSize ? [curPos[0] + 1, curPos[1]] : null;
+    var right = curPos[1] + 1 < position.colSize ? [curPos[0], curPos[1] + 1] : null;
+    var down = curPos[0] + 1 < position.rowSize ? [curPos[0] + 1, curPos[1]] : null;
     var left = curPos[1] - 1 >= 0 ? [curPos[0], curPos[1] - 1] : null;
 
     // because there are variables declared outside of while but are used inside, ex: which
     // eslint-disable-next-line
     [up, right, down, left].forEach((nextPos, idx) => {
-       // If it exceeds the boundary or is a wall or has found the end
-       // nextPos should be undefined if wall because the if statement in line 83
+      // If it exceeds the boundary or is a wall or has found the end
+      // nextPos should be undefined if wall because the if statement in line 83
       if (!nextPos || nextPos in position.wall || isFoundEnd) return;
 
       // I have to update the ones I have gone through
@@ -105,8 +97,7 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
       switch (whichAlgo) {
         case "Dijkstra":
           // The strategy is: only consider the current total score + turn to score
-          total =
-            table[which][curPos][0] + GetScore(table[which][curPos][2], idx);
+          total = table[which][curPos][0] + GetScore(table[which][curPos][2], idx);
           break;
         default:
           break;
@@ -145,11 +136,7 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
 
       // Join the points that have not been walked
       if (!visited[which].has(curPos.toString())) {
-        unvisited[which].Push(
-          table[which][nextPos][3],
-          GetHeuristic(nextPos, endPos),
-          nextPos
-        );
+        unvisited[which].Push(table[which][nextPos][3], GetHeuristic(nextPos, endPos), nextPos);
       }
 
       // If the other party finds something during the search process, update actualEnd
@@ -162,7 +149,6 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
         // Because it is looking for the surrounding area, after finding the end, add the end information to it
         table[which][actualEnd][1] = curPos;
       }
-
     }); // end foreach(up,right,left down)
 
     if (!visited[which].has(curPos.toString())) {
@@ -184,7 +170,7 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
     which = 1;
     while (curPos) {
       // Because the previous vertex when the start is found is null
-      curShortestPath.unshift(curPos); 
+      curShortestPath.unshift(curPos);
       retDirection.unshift(table[(which + 1) % 2][curPos][2]);
       curPos = table[(which + 1) % 2][curPos][1];
     }
@@ -212,7 +198,7 @@ function GetClosestNode(unvisited) {
 // Make the search start closest to the starting point, because turning points will add up
 // Control the search direction
 // Considering the turning score is to search for only one line. If there is no such score, the search will become three lines. Because the estimate of the distance to the end point may be the same, it will take three paths.
-// Up right down left
+// Up right down left is 0 1 2 3
 function GetScore(direction, index) {
   var score = 0;
   switch (direction) {
