@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 // Guarantee Odd
 export function adjust(size) {
@@ -37,42 +37,42 @@ export const originPos = {
 
 // All Css
 export const componentKind = {
-  add: "wall",
-  wall: "wall",
+  add: 'wall',
+  wall: 'wall',
 
   /*---------dynamic---------*/
 
-  start: "start",
-  startSearch: "startSearch",
-  startPath: "startPath",
+  start: 'start',
+  startSearch: 'startSearch',
+  startPath: 'startPath',
 
-  end: "end",
-  endSearch: "endSearch",
-  endPath: "endPath",
+  end: 'end',
+  endSearch: 'endSearch',
+  endPath: 'endPath',
 
-  search: "search",
-  path: "path",
+  search: 'search',
+  path: 'path',
 
   /*----------static-----------*/
-  searchStatic: "searchStatic",
-  pathStatic: "pathStatic",
+  searchStatic: 'searchStatic',
+  pathStatic: 'pathStatic',
 
   /*----------------------------*/
-  pathHead: "pathHead",
-  pathHeadLeft: "pathHeadLeft",
-  pathHeadRight: "pathHeadRight",
-  pathHeadUp: "pathHeadUp",
-  pathHeadDown: "pathHeadDown",
+  pathHead: 'pathHead',
+  pathHeadLeft: 'pathHeadLeft',
+  pathHeadRight: 'pathHeadRight',
+  pathHeadUp: 'pathHeadUp',
+  pathHeadDown: 'pathHeadDown',
 
-  background: "background",
+  background: 'background',
 };
 
 export const synchronize = {
   update: true, // Added because the reducer is out of sync
-  animation: "Algorithm",
+  animation: 'Algorithm',
 
-  algorithm: "", // Because the first addEventListener reducer will be blank
-  sysStatus: "IDLE",
+  algorithm: '', // Because the first addEventListener reducer will be blank
+  sysStatus: 'IDLE',
 };
 
 // touch status // record which component the start, end overlaps with
@@ -94,7 +94,7 @@ export const touchReducer = (state, action) => {
 
 // Record which component the mouse is currently catching
 export const moveContext = createContext();
-export const moveInitial = "";
+export const moveInitial = '';
 export const moveReducer = (state, action) => {
   switch (action) {
     case componentKind.start:
@@ -113,9 +113,9 @@ export const updateContext = createContext();
 export const updateInitial = false;
 export const updateReducer = (state, action) => {
   switch (action) {
-    case "True":
+    case 'True':
       return true;
-    case "False":
+    case 'False':
       return false;
     default:
       return updateInitial;

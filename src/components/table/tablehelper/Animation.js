@@ -1,7 +1,7 @@
-import { componentKind } from "./TableIndex";
-import { setTable } from "./SetTable";
-import { WhichComponentSame, StartEnd } from "./WhichComp";
-import { position } from "../../core/index";
+import { componentKind } from './TableIndex';
+import { setTable } from './SetTable';
+import { WhichComponentSame, StartEnd } from './WhichComp';
+import { position } from '../../core/index';
 
 export const stopStatus = {
   // Store the state to resume
@@ -14,7 +14,7 @@ export const stopStatus = {
   pathResult: [],
   pathDirectionResult: [],
 
-  algorithm: "",
+  algorithm: '',
 
   maze: 0,
   mazeResult: [],
@@ -42,36 +42,17 @@ export function resetAnimation() {
 
 /* Search */
 
-export function SearchFinalAnimation(
-  search,
-  path,
-  pathDirection,
-  speed,
-  SearchAnimation,
-  sysStatusFunction,
-  updateFunction
-) {
+export function SearchFinalAnimation(search, path, pathDirection, speed, SearchAnimation, sysStatusFunction, updateFunction) {
   // stopStatus.complete = false;
   var count = stopStatus.searchStop[0];
   const searchFinalAnimation = setInterval(() => {
     if (count === search.length) {
       stopStatus.searchStop = [search.length, 0];
       // finish search, call animation
-      SearchAnimation(
-        path,
-        pathDirection,
-        speed,
-        PathAnimation,
-        sysStatusFunction,
-        updateFunction
-      );
+      SearchAnimation(path, pathDirection, speed, PathAnimation, sysStatusFunction, updateFunction);
       clearInterval(searchFinalAnimation);
     } else {
-      for (
-        var i = (count === stopStatus.searchStop[0]) * stopStatus.searchStop[1];
-        i < search[count].length;
-        i++
-      ) {
+      for (var i = (count === stopStatus.searchStop[0]) * stopStatus.searchStop[1]; i < search[count].length; i++) {
         if (stopStatus.animationStatus === false) {
           stopStatus.searchStop = [count, i];
           sysStatusFunction();
@@ -83,14 +64,7 @@ export function SearchFinalAnimation(
             setTable(search[count][i], componentKind.search);
           } else {
             // set start and end
-            setTable(
-              search[count][i],
-              StartEnd(
-                WhichComponentSame(search[count][i]),
-                componentKind.startSearch,
-                componentKind.endSearch
-              )
-            );
+            setTable(search[count][i], StartEnd(WhichComponentSame(search[count][i]), componentKind.startSearch, componentKind.endSearch));
           }
         }
       }
@@ -99,34 +73,15 @@ export function SearchFinalAnimation(
   }, speed);
 }
 
-export function SearchAnimation(
-  path,
-  pathDirection,
-  speed,
-  PathAnimation,
-  sysStatusFunction,
-  updateFunction
-) {
+export function SearchAnimation(path, pathDirection, speed, PathAnimation, sysStatusFunction, updateFunction) {
   const searchAnimation = setInterval(() => {
     // set shortest path css
-    PathAnimation(
-      path,
-      speed,
-      pathDirection,
-      sysStatusFunction,
-      updateFunction
-    );
+    PathAnimation(path, speed, pathDirection, sysStatusFunction, updateFunction);
     clearInterval(searchAnimation);
   }, speed);
 }
 
-export function PathAnimation(
-  path,
-  speed,
-  pathDirection,
-  sysStatusFunction,
-  updateFunction
-) {
+export function PathAnimation(path, speed, pathDirection, sysStatusFunction, updateFunction) {
   var [id, newid] = [stopStatus.pathID[0], stopStatus.pathID[1]];
   var count = stopStatus.path;
 
@@ -147,21 +102,14 @@ export function PathAnimation(
           newid = path[count];
           // set shortest path ( yellow)
           setTable(id, componentKind.path);
-          // set rocket path 
-          setTable(newid, direction(pathDirection[count])); 
+          // set rocket path
+          setTable(newid, direction(pathDirection[count]));
 
           id = newid;
         } else {
           // WhichComponentSame(path[count]) < 1 ( start, end node)
           setTable(id, componentKind.path);
-          setTable(
-            path[count],
-            StartEnd(
-              WhichComponentSame(path[count]),
-              direction(pathDirection[count]),
-              direction(pathDirection[count])
-            )
-          );
+          setTable(path[count], StartEnd(WhichComponentSame(path[count]), direction(pathDirection[count]), direction(pathDirection[count])));
         }
       }
     }
@@ -175,14 +123,7 @@ export function FinalAnimation(search, path, pathDirection) {
       if (WhichComponentSame(search[i][j]) > 1) {
         setTable(search[i][j], componentKind.searchStatic);
       } else {
-        setTable(
-          search[i][j],
-          StartEnd(
-            WhichComponentSame(search[i][j]),
-            componentKind.startSearch,
-            componentKind.endSearch
-          )
-        );
+        setTable(search[i][j], StartEnd(WhichComponentSame(search[i][j]), componentKind.startSearch, componentKind.endSearch));
       }
     }
   }
@@ -191,27 +132,20 @@ export function FinalAnimation(search, path, pathDirection) {
       // wall
       setTable(path[i], componentKind.pathStatic);
     } else {
-      setTable(
-        path[i],
-        StartEnd(
-          WhichComponentSame(path[i]),
-          direction(pathDirection[i]),
-          direction(pathDirection[i])
-        )
-      );
+      setTable(path[i], StartEnd(WhichComponentSame(path[i]), direction(pathDirection[i]), direction(pathDirection[i])));
     }
   }
 }
 
 function direction(kind) {
   switch (kind) {
-    case "left":
+    case 'left':
       return componentKind.pathHeadLeft;
-    case "right":
+    case 'right':
       return componentKind.pathHeadRight;
-    case "up":
+    case 'up':
       return componentKind.pathHeadUp;
-    case "down":
+    case 'down':
       return componentKind.pathHeadDown;
     default:
       return componentKind.path;

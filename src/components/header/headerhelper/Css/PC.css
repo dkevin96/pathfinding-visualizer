@@ -58,7 +58,7 @@
 }
 
 #mainInfo > ul li {
-  font-family: "Righteous", cursive;
+  font-family: 'Righteous', cursive;
   display: inline-block;
   list-style: none;
   font-size: 1vw;
@@ -79,11 +79,11 @@
 }
 
 .Info-Start-Node {
-  background-image: url("../../../../Resources/Images/Info/StartNode.png");
+  background-image: url('../../../../Resources/Images/Info/StartNode.png');
 }
 
 .Info-End-Node {
-  background-image: url("../../../../Resources/Images/Info/EndNode.png");
+  background-image: url('../../../../Resources/Images/Info/EndNode.png');
 }
 
 .Info-Unvisited-Node {
@@ -92,19 +92,19 @@
 }
 
 .Info-Visited-Node {
-  background-image: url("../../../../Resources/Images/Info/VisitedNode1.png");
+  background-image: url('../../../../Resources/Images/Info/VisitedNode1.png');
 }
 
 .Info-ShortestPathNode-Node {
-  background-image: url("../../../../Resources/Images/Info/ShortestPathNode.png");
+  background-image: url('../../../../Resources/Images/Info/ShortestPathNode.png');
 }
 
 .Info-WallNode-Node {
-  background-image: url("../../../../Resources/Images/Info/WallNode.png");
+  background-image: url('../../../../Resources/Images/Info/WallNode.png');
 }
 
 #algorithmDescriptor {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   color: var(--text-color);
   font-size: 1.5vw;
@@ -124,14 +124,14 @@
 }
 
 .navbar-logo {
-  font-family: "Righteous", cursive;
+  font-family: 'Righteous', cursive;
   font-size: 2vw !important;
   color: var(--nav-text-color) !important;
 }
 
 .nav-bar {
   width: 100%;
-  font-family: "Righteous", cursive;
+  font-family: 'Righteous', cursive;
 }
 
 .nav-item {

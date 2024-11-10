@@ -1,21 +1,21 @@
-import { useState, useContext } from "react";
-import { sysStatusContext } from "../../core/index";
+import { useState, useContext } from 'react';
+import { sysStatusContext } from '../../core/index';
 
 const Colored = () => {
   const sysStatus = useContext(sysStatusContext);
   const [isHover, setIsHover] = useState(false);
-  const [className, setClassName] = useState("nav-link-default");
+  const [className, setClassName] = useState('nav-link-default');
 
   const toggleHandler = () => {
     if (isHover) {
-      setClassName("nav-link-default");
+      setClassName('nav-link-default');
       setIsHover(false);
     } else {
-      if (sysStatus.get !== "IDLE" && sysStatus.get !== "STOP") {
+      if (sysStatus.get !== 'IDLE' && sysStatus.get !== 'STOP') {
         // SysStatus is running
-        setClassName("nav-link-red");
+        setClassName('nav-link-red');
       } else {
-        setClassName("nav-link-green");
+        setClassName('nav-link-green');
       }
       setIsHover(true);
     }

@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { NavDropdown, Nav } from "react-bootstrap";
-import { algorithmContext, sysStatusContext } from "../../../core/index";
-import Colored from "../../headerhelper/Colored";
-import ButtonEvent from "../../../table/tablehelper/ButtonEvent";
+import React, { useContext } from 'react';
+import { NavDropdown, Nav } from 'react-bootstrap';
+import { algorithmContext, sysStatusContext } from '../../../core/index';
+import Colored from '../../headerhelper/Colored';
+import ButtonEvent from '../../../table/tablehelper/ButtonEvent';
 
 function DropdownAlgorithm() {
   const algoContext = useContext(algorithmContext);
@@ -10,22 +10,22 @@ function DropdownAlgorithm() {
   const [className, toggleHandler] = Colored();
   const buttonEvent = ButtonEvent();
 
-  const DropdownAlgorithmHandler = (eventKey) => {
-    if (sysStatus.get !== "IDLE" && sysStatus.get !== "STOP") {
+  const DropdownAlgorithmHandler = eventKey => {
+    if (sysStatus.get !== 'IDLE' && sysStatus.get !== 'STOP') {
       // isrunning
       return;
     }
     switch (eventKey) {
-      case "Algorithm_Dijkstra":
-        algoContext.set("Algorithm_Dijkstra");
+      case 'Algorithm_Dijkstra':
+        algoContext.set('Algorithm_Dijkstra');
         break;
-      case "Algorithm_Depth_First":
+      case 'Algorithm_Depth_First':
         buttonEvent.ClearPath(false);
-        algoContext.set("Algorithm_Depth_First");
+        algoContext.set('Algorithm_Depth_First');
         break;
-      case "Algorithm_Breadth_First":
+      case 'Algorithm_Breadth_First':
         buttonEvent.ClearPath(false);
-        algoContext.set("Algorithm_Breadth_First");
+        algoContext.set('Algorithm_Breadth_First');
         break;
 
       default:
@@ -39,7 +39,7 @@ function DropdownAlgorithm() {
         xs={1}
         title={<span className={className}>Algorithms</span>}
         id="DropdownAlgorithm"
-        onSelect={(eventKey) => DropdownAlgorithmHandler(eventKey)}
+        onSelect={eventKey => DropdownAlgorithmHandler(eventKey)}
         onMouseEnter={toggleHandler}
         onMouseLeave={toggleHandler}
       >

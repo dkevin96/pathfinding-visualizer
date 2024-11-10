@@ -40,14 +40,13 @@
 
 body {
   margin: 0;
-  font-family: "Righteous", cursive, "Roboto", sans-serif;
+  font-family: 'Righteous', cursive, 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .App {
@@ -71,7 +70,7 @@ code {
 }
 
 .start {
-  background: var(--background) url("./Resources/Images/Info/StartNode.png");
+  background: var(--background) url('./Resources/Images/Info/StartNode.png');
   /* background-color: green; */
   background-position: center;
   background-size: cover;
@@ -80,7 +79,7 @@ code {
 }
 
 .startSearch {
-  background: var(--search) url("./Resources/Images/Info/StartNode.png");
+  background: var(--search) url('./Resources/Images/Info/StartNode.png');
   /* background-color: green; */
   background-position: center;
   background-size: cover;
@@ -89,7 +88,7 @@ code {
 }
 
 .startPath {
-  background: var(--path) url("./Resources/Images/Info/StartNode.png");
+  background: var(--path) url('./Resources/Images/Info/StartNode.png');
   /* background-color: green; */
   background-position: center;
   background-size: cover;
@@ -126,7 +125,7 @@ code {
 }
 
 .end {
-  background: var(--background) url("./Resources/Images/Info/EndNode.png");
+  background: var(--background) url('./Resources/Images/Info/EndNode.png');
   /* background-color: red; */
   background-position: center;
   background-size: cover;
@@ -135,7 +134,7 @@ code {
 }
 
 .endSearch {
-  background: var(--search) url("./Resources/Images/Info/EndNode.png");
+  background: var(--search) url('./Resources/Images/Info/EndNode.png');
   /* background-color: red; */
   background-position: center;
   background-size: cover;
@@ -144,7 +143,7 @@ code {
 }
 
 .endPath {
-  background: var(--path) url("./Resources/Images/Info/EndNode.png");
+  background: var(--path) url('./Resources/Images/Info/EndNode.png');
   /* background-color: red; */
   background-position: center;
   background-size: cover;
@@ -276,7 +275,7 @@ code {
 }
 
 .pathHeadLeft {
-  background: var(--path) url("./Resources/Images/Info/PathHead.png");
+  background: var(--path) url('./Resources/Images/Info/PathHead.png');
   /* background-color: red; */
   background-position: center;
   background-size: cover;
@@ -285,7 +284,7 @@ code {
 }
 
 .pathHeadRight {
-  background: var(--path) url("./Resources/Images/Info/PathHead.png");
+  background: var(--path) url('./Resources/Images/Info/PathHead.png');
   /* background-color: red; */
   background-position: center;
   background-size: cover;
@@ -294,7 +293,7 @@ code {
 }
 
 .pathHeadUp {
-  background: var(--path) url("./Resources/Images/Info/PathHead.png");
+  background: var(--path) url('./Resources/Images/Info/PathHead.png');
   /* background-color: red; */
   background-position: center;
   background-size: cover;
@@ -302,7 +301,7 @@ code {
 }
 
 .pathHeadDown {
-  background: var(--path) url("./Resources/Images/Info/PathHead.png");
+  background: var(--path) url('./Resources/Images/Info/PathHead.png');
   /* background-color: red; */
   background-position: center;
   background-size: cover;

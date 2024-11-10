@@ -1,4 +1,4 @@
-import { position } from "../components/core/index";
+import { position } from '../components/core/index';
 
 function DFS(startCallback, speed) {
   var retSearchPath = [];
@@ -25,25 +25,25 @@ function DFS(startCallback, speed) {
     if (DoDFS(x - 1, y, endPos, visited, retSearchPath, retShortestPath, retDirection)) {
       // up
       retShortestPath.unshift([x, y]);
-      retDirection.unshift("up");
+      retDirection.unshift('up');
       return true;
     }
     if (DoDFS(x, y + 1, endPos, visited, retSearchPath, retShortestPath, retDirection)) {
       // right
       retShortestPath.unshift([x, y]);
-      retDirection.unshift("right");
+      retDirection.unshift('right');
       return true;
     }
     if (DoDFS(x + 1, y, endPos, visited, retSearchPath, retShortestPath, retDirection)) {
       // down
       retShortestPath.unshift([x, y]);
-      retDirection.unshift("down");
+      retDirection.unshift('down');
       return true;
     }
     if (DoDFS(x, y - 1, endPos, visited, retSearchPath, retShortestPath, retDirection)) {
       // left
       retShortestPath.unshift([x, y]);
-      retDirection.unshift("left");
+      retDirection.unshift('left');
       return true;
     }
   }
@@ -52,7 +52,7 @@ function DFS(startCallback, speed) {
   const visited = new Set();
   var start = position.start;
 
-  console.log("DFS");
+  console.log('DFS');
   DoDFS(start[0], start[1], position.end, visited, retSearchPath, retShortestPath, retDirection);
 
   // When bottom up, the tail is not sure of the direction, so now add the direction

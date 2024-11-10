@@ -1,7 +1,7 @@
-import PC from "./headerhelper/PC";
+import PC from './headerhelper/PC';
 
 function Header() {
-  import("./headerhelper/Css/PC.css");
+  import('./headerhelper/Css/PC.css');
   return <PC />;
 }
 

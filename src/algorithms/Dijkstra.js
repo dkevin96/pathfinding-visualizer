@@ -1,5 +1,5 @@
-import PriorityQueue from "./PriorityQueue";
-import { position } from "../components/core/index";
+import PriorityQueue from './PriorityQueue';
+import { position } from '../components/core/index';
 
 function Dijkstra(whichAlgo, startCallback, speed) {
   var retSearchPath = [];
@@ -42,12 +42,12 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
   var unvisited = [new PriorityQueue(), new PriorityQueue()]; // [0]: start, [1]: end
   // setup first postition
   switch (whichAlgo) {
-    case "Dijkstra":
-      console.log("dijkstra");
-      table[0][startPos] = [0, null, "up", 0]; //Set starting point
+    case 'Dijkstra':
+      console.log('dijkstra');
+      table[0][startPos] = [0, null, 'up', 0]; //Set starting point
       unvisited[0].Push(0, 0, startPos); // Set the current shortest path queue
       end = [endPos];
-      console.log("end pos " + end);
+      console.log('end pos ' + end);
       break;
     default:
       break;
@@ -95,7 +95,7 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
       // I have to update the ones I have gone through
       var total = null;
       switch (whichAlgo) {
-        case "Dijkstra":
+        case 'Dijkstra':
           // The strategy is: only consider the current total score + turn to score
           total = table[which][curPos][0] + GetScore(table[which][curPos][2], idx);
           break;
@@ -109,16 +109,16 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
         table[which][nextPos][1] = curPos;
         switch (idx) {
           case 0:
-            table[which][nextPos][2] = "up";
+            table[which][nextPos][2] = 'up';
             break;
           case 1:
-            table[which][nextPos][2] = "right";
+            table[which][nextPos][2] = 'right';
             break;
           case 2:
-            table[which][nextPos][2] = "down";
+            table[which][nextPos][2] = 'down';
             break;
           case 3:
-            table[which][nextPos][2] = "left";
+            table[which][nextPos][2] = 'left';
             break;
           default:
             break;
@@ -126,7 +126,7 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
 
         // update new total point
         switch (whichAlgo) {
-          case "Dijkstra":
+          case 'Dijkstra':
             table[which][nextPos][3] = table[which][nextPos][0];
             break;
           default:
@@ -165,7 +165,7 @@ function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
 
   // If you find the end point, then judge the minimum path by backtracking
   if (isFoundEnd) {
-    console.log("BackTracking...");
+    console.log('BackTracking...');
     curPos = actualEnd;
     which = 1;
     while (curPos) {
@@ -202,7 +202,7 @@ function GetClosestNode(unvisited) {
 function GetScore(direction, index) {
   var score = 0;
   switch (direction) {
-    case "up":
+    case 'up':
       switch (index) {
         case 0:
           score = 1;
@@ -220,7 +220,7 @@ function GetScore(direction, index) {
           break;
       }
       break;
-    case "right":
+    case 'right':
       switch (index) {
         case 0:
           score = 2;
@@ -238,7 +238,7 @@ function GetScore(direction, index) {
           break;
       }
       break;
-    case "down":
+    case 'down':
       switch (index) {
         case 0:
           score = 3;
@@ -256,7 +256,7 @@ function GetScore(direction, index) {
           break;
       }
       break;
-    case "left":
+    case 'left':
       switch (index) {
         case 0:
           score = 2;

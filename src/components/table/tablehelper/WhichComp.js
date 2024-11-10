@@ -1,5 +1,5 @@
-import { tableVar, componentKind } from "./TableIndex";
-import { position } from "../../core/index";
+import { tableVar, componentKind } from './TableIndex';
+import { position } from '../../core/index';
 
 function addComponentKind(kind) {
   switch (kind) {
@@ -14,11 +14,8 @@ export function WhichComponent(id, touch) {
   // MouseEvent
   var pos = id;
 
-  if (typeof id === "number") {
-    pos = [
-      Math.floor(parseInt(id) / tableVar.colSize),
-      parseInt(id) % tableVar.colSize,
-    ];
+  if (typeof id === 'number') {
+    pos = [Math.floor(parseInt(id) / tableVar.colSize), parseInt(id) % tableVar.colSize];
   }
 
   if (position.start[0] === pos[0] && position.start[1] === pos[1]) {
@@ -45,11 +42,8 @@ export function WhichComponentSame(id) {
 
   var pos = id;
 
-  if (typeof id === "string" || typeof id === "number") {
-    pos = [
-      Math.floor(parseInt(id) / tableVar.colSize),
-      parseInt(id) % tableVar.colSize,
-    ];
+  if (typeof id === 'string' || typeof id === 'number') {
+    pos = [Math.floor(parseInt(id) / tableVar.colSize), parseInt(id) % tableVar.colSize];
   }
 
   if (position.start[0] === pos[0] && position.start[1] === pos[1]) {
