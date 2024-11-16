@@ -1,283 +1,161 @@
 import PriorityQueue from './PriorityQueue';
 import { position } from '../components/core/index';
 
-function Dijkstra(whichAlgo, startCallback, speed) {
-  var retSearchPath = [];
-  var retShortestPath = [];
-  var retDirection = [];
+const DIRECTIONS = {
+  UP: 'up',
+  RIGHT: 'right',
+  DOWN: 'down',
+  LEFT: 'left',
+};
 
-  // all the arrays are updated in the callback function, which allow the animation (painting) to be executed
-  retShortestPath = retShortestPath.concat(DoDijkstra(whichAlgo, position.start, position.end, retSearchPath, retDirection));
+/* 
+ * Direction scoring system for path movements:
+ * - Keys represent current direction (UP, RIGHT, DOWN, LEFT)
+ * - Values are costs for turning to each direction (0=UP, 1=RIGHT, 2=DOWN, 3=LEFT)
+ * - Scoring: 1=continue straight, 2=90° turn, 3=180° U-turn
+ * - Lower scores are preferred, creating more natural paths with fewer turns
+ */
+const DIRECTION_SCORES = {
+  [DIRECTIONS.UP]: { 0: 1, 1: 2, 2: 3, 3: 2 }, // up, right, down, left
+  [DIRECTIONS.RIGHT]: { 0: 2, 1: 1, 2: 2, 3: 3 },
+  [DIRECTIONS.DOWN]: { 0: 3, 1: 2, 2: 1, 3: 2 },
+  [DIRECTIONS.LEFT]: { 0: 2, 1: 3, 2: 2, 3: 1 },
+};
 
-  // Execute start animation
-  startCallback(retSearchPath, retShortestPath, retDirection, speed);
-}
-
-// Return the shortest path
-function DoDijkstra(whichAlgo, startPos, endPos, searchPath, retDirection) {
-  /*  //https://medium.com/basecs/finding-the-shortest-path-with-a-little-help-from-dijkstra-613149fbdc8e
-        Create Dijkstra table 
-        
-        table = {pos : [shortest distance, previous vertex]}
-            * start pos : [0, null]
-            * use priority queue to pick the pos which contains current shortest disance.
-    */
-
-  // Set table: starting point is 0, others are infinite, all previous vertex are null
-  // Set the current shortest path queue
-  // table[0] starts from start, table[1] starts from end (only for bidirectional swarm algorithm)
-  var table = [{}, {}];
-  var i, j;
-  for (i = 0; i < position.rowSize; i++) {
-    for (j = 0; j < position.colSize; j++) {
-      var pos = [i, j];
-
-      // The shortest distance from the starting point to pos, the previous point, direction, total distance
-      table[0][pos] = [Infinity, null, null, Infinity];
-      table[1][pos] = [Infinity, null, null, Infinity]; // for determines the starting point（bidirection
-    }
+class DijkstraPathfinder {
+  constructor(startPos, endPos) {
+    this.startPos = startPos;
+    this.endPos = endPos;
+    this.searchPath = [];
+    this.retDirection = [];
+    this.visited = [new Set(), new Set()];
+    this.unvisited = [new PriorityQueue(), new PriorityQueue()];
+    this.table = this.initializeTable();
   }
 
-  var end = null; // Determine the end
-  var unvisited = [new PriorityQueue(), new PriorityQueue()]; // [0]: start, [1]: end
-  // setup first postition
-  switch (whichAlgo) {
-    case 'Dijkstra':
-      console.log('dijkstra');
-      table[0][startPos] = [0, null, 'up', 0]; //Set starting point
-      unvisited[0].Push(0, 0, startPos); // Set the current shortest path queue
-      end = [endPos];
-      console.log('end pos ' + end);
-      break;
-    default:
-      break;
+  initializeTable() {
+    const table = [{}, {}];
+    for (let i = 0; i < position.rowSize; i++) {
+      for (let j = 0; j < position.colSize; j++) {
+        const pos = [i, j];
+        // [distance, previousNode, direction, totalDistance]
+        table[0][pos] = [Infinity, null, null, Infinity];
+        table[1][pos] = [Infinity, null, null, Infinity];
+      }
+    }
+    table[0][this.startPos] = [0, null, DIRECTIONS.UP, 0];
+    return table;
   }
 
-  /* Algorithm begins */
-  var curShortestPath = [];
-  var which = 0; // 0 for start, 1 for end
-  var actualEnd = null;
-  var isFoundEnd = false;
-  var visited = [new Set(), new Set()]; // [0]: start, [1]: end
+  getNeighbors(curPos) {
+    return {
+      [DIRECTIONS.UP]: curPos[0] - 1 >= 0 ? [curPos[0] - 1, curPos[1]] : null,
+      [DIRECTIONS.RIGHT]: curPos[1] + 1 < position.colSize ? [curPos[0], curPos[1] + 1] : null,
+      [DIRECTIONS.DOWN]: curPos[0] + 1 < position.rowSize ? [curPos[0] + 1, curPos[1]] : null,
+      [DIRECTIONS.LEFT]: curPos[1] - 1 >= 0 ? [curPos[0], curPos[1] - 1] : null,
+    };
+  }
 
-  while (unvisited[0].Length() > 0 || unvisited[1].Length() > 0) {
-    // Choose which way to go, for Bidrectional Swarm Algorithm
-    if (unvisited[0].Length() > 0 && unvisited[1].Length() > 0) {
-      which = (which + 1) % 2;
-    } else if (unvisited[0].Length() > 0) {
-      which = 0;
-    } else if (unvisited[1].Length() > 0) {
-      which = 1;
+  calculateHeuristic(startPos, endPos) {
+    return Math.abs(endPos[0] - startPos[0]) + Math.abs(endPos[1] - startPos[1]);
+  }
+
+  getDirectionScore(currentDirection, newDirectionIndex) {
+    return DIRECTION_SCORES[currentDirection]?.[newDirectionIndex] || Infinity;
+  }
+
+  processNeighbor(nextPos, curPos, directionIndex, which, isFoundEnd) {
+    if (!nextPos || nextPos in position.wall || isFoundEnd) return { isFoundEnd, actualEnd: null };
+
+    const total = this.table[which][curPos][0] + this.getDirectionScore(this.table[which][curPos][2], directionIndex);
+
+    if (total <= this.table[which][nextPos][0]) {
+      this.updateTableEntry(which, nextPos, total, curPos, directionIndex);
     }
 
-    // 1. Pick the point of the current minimum
-    var curPos = null;
-    curPos = GetClosestNode(unvisited[which]);
-
-    if (curPos in position.wall || visited[which].has(curPos.toString())) {
-      continue; // The wall does not go, and the points that have been passed will not go. There may be the same point but different values. You can use the priority queue to catch the smallest point first, and remove the same point next time.
+    if (!this.visited[which].has(curPos.toString())) {
+      this.unvisited[which].Push(this.table[which][nextPos][3], this.calculateHeuristic(nextPos, this.endPos), nextPos);
     }
 
-    // 2. Calculate the points that are adjacent and have not been traversed
-    // curPos: [row, column, pos]
-    var up = curPos[0] - 1 >= 0 ? [curPos[0] - 1, curPos[1]] : null;
-    var right = curPos[1] + 1 < position.colSize ? [curPos[0], curPos[1] + 1] : null;
-    var down = curPos[0] + 1 < position.rowSize ? [curPos[0] + 1, curPos[1]] : null;
-    var left = curPos[1] - 1 >= 0 ? [curPos[0], curPos[1] - 1] : null;
-
-    // because there are variables declared outside of while but are used inside, ex: which
-    // eslint-disable-next-line
-    [up, right, down, left].forEach((nextPos, idx) => {
-      // If it exceeds the boundary or is a wall or has found the end
-      // nextPos should be undefined if wall because the if statement in line 83
-      if (!nextPos || nextPos in position.wall || isFoundEnd) return;
-
-      // I have to update the ones I have gone through
-      var total = null;
-      switch (whichAlgo) {
-        case 'Dijkstra':
-          // The strategy is: only consider the current total score + turn to score
-          total = table[which][curPos][0] + GetScore(table[which][curPos][2], idx);
-          break;
-        default:
-          break;
-      }
-
-      // console.log(`total: ${total} and nextpos: ${table[which][nextPos][0]}`)
-      if (total <= table[which][nextPos][0]) {
-        table[which][nextPos][0] = total;
-        table[which][nextPos][1] = curPos;
-        switch (idx) {
-          case 0:
-            table[which][nextPos][2] = 'up';
-            break;
-          case 1:
-            table[which][nextPos][2] = 'right';
-            break;
-          case 2:
-            table[which][nextPos][2] = 'down';
-            break;
-          case 3:
-            table[which][nextPos][2] = 'left';
-            break;
-          default:
-            break;
-        }
-
-        // update new total point
-        switch (whichAlgo) {
-          case 'Dijkstra':
-            table[which][nextPos][3] = table[which][nextPos][0];
-            break;
-          default:
-            break;
-        }
-      }
-
-      // Join the points that have not been walked
-      if (!visited[which].has(curPos.toString())) {
-        unvisited[which].Push(table[which][nextPos][3], GetHeuristic(nextPos, endPos), nextPos);
-      }
-
-      // If the other party finds something during the search process, update actualEnd
-
-      if (nextPos.toString() === endPos.toString()) {
-        // See if you find the end
-        actualEnd = nextPos;
-        isFoundEnd = true;
-
-        // Because it is looking for the surrounding area, after finding the end, add the end information to it
-        table[which][actualEnd][1] = curPos;
-      }
-    }); // end foreach(up,right,left down)
-
-    if (!visited[which].has(curPos.toString())) {
-      searchPath.push([curPos]); // Add to search
-      visited[which].add(curPos.toString()); // Join already
+    if (nextPos.toString() === this.endPos.toString()) {
+      this.table[which][nextPos][1] = curPos;
+      return { isFoundEnd: true, actualEnd: nextPos };
     }
 
-    if (isFoundEnd) {
-      // Find the end and jump out
-      searchPath.push([actualEnd]);
-      break;
-    }
-  } //  while (unvisited[0].Length() > 0 || unvisited[1].Length() > 0)
+    return { isFoundEnd, actualEnd: null };
+  }
 
-  // If you find the end point, then judge the minimum path by backtracking
-  if (isFoundEnd) {
-    console.log('BackTracking...');
-    curPos = actualEnd;
-    which = 1;
+  updateTableEntry(which, pos, total, previousPos, directionIndex) {
+    const directions = [DIRECTIONS.UP, DIRECTIONS.RIGHT, DIRECTIONS.DOWN, DIRECTIONS.LEFT];
+    this.table[which][pos] = [total, previousPos, directions[directionIndex], total];
+  }
+
+  reconstructPath(actualEnd, which) {
+    const path = [];
+    let curPos = actualEnd;
+
     while (curPos) {
-      // Because the previous vertex when the start is found is null
-      curShortestPath.unshift(curPos);
-      retDirection.unshift(table[(which + 1) % 2][curPos][2]);
-      curPos = table[(which + 1) % 2][curPos][1];
+      path.unshift(curPos);
+      this.retDirection.unshift(this.table[which][curPos][2]);
+      curPos = this.table[which][curPos][1];
     }
+
+    if (this.retDirection.length > 0) {
+      this.retDirection.splice(0, 1);
+      this.retDirection.unshift(this.retDirection[0]);
+    }
+
+    return path;
   }
 
-  // Because it is looking for the surrounding area, only the surrounding area is updated, so the head information will not be updated, so remove the head and extend the current first position.
-  // console.log(retDirection) if choose up direction -> [up, right ,right,...]
-  retDirection.splice(0, 1);
-  retDirection.unshift(retDirection[0]);
-  return curShortestPath;
-}
+  findPath() {
+    this.unvisited[0].Push(0, 0, this.startPos);
+    let isFoundEnd = false;
+    let actualEnd = null;
+    let which = 0;
 
-// Estimated value: expressed by distance, because it is a chessboard, it is changed to the shortest distance a few squares
-function GetHeuristic(startPos, endPos) {
-  return Math.abs(endPos[0] - startPos[0]) + Math.abs(endPos[1] - startPos[1]);
-}
+    while (this.unvisited[0].Length() > 0 || this.unvisited[1].Length() > 0) {
+      which = this.determineSearchDirection(which);
 
-// Find the minimum score, strategy: consider all scores Current total score: previous total score + weight + turn to score + estimate
-function GetClosestNode(unvisited) {
-  let retPos = unvisited.Pop();
-  return retPos;
-}
+      const curPos = this.unvisited[which].Pop();
+      if (curPos in position.wall || this.visited[which].has(curPos.toString())) continue;
 
-// Get steering score
-// Make the search start closest to the starting point, because turning points will add up
-// Control the search direction
-// Considering the turning score is to search for only one line. If there is no such score, the search will become three lines. Because the estimate of the distance to the end point may be the same, it will take three paths.
-// Up right down left is 0 1 2 3
-function GetScore(direction, index) {
-  var score = 0;
-  switch (direction) {
-    case 'up':
-      switch (index) {
-        case 0:
-          score = 1;
-          break;
-        case 1:
-          score = 2;
-          break;
-        case 2:
-          score = 3;
-          break;
-        case 3:
-          score = 2;
-          break;
-        default:
-          break;
+      const neighbors = this.getNeighbors(curPos);
+      const neighborEntries = Object.entries(neighbors);
+      for (let i = 0; i < neighborEntries.length; i++) {
+        const [_, nextPos] = neighborEntries[i];
+        const result = this.processNeighbor(nextPos, curPos, i, which, isFoundEnd);
+        isFoundEnd = result.isFoundEnd;
+        if (result.actualEnd) actualEnd = result.actualEnd;
       }
-      break;
-    case 'right':
-      switch (index) {
-        case 0:
-          score = 2;
-          break;
-        case 1:
-          score = 1;
-          break;
-        case 2:
-          score = 2;
-          break;
-        case 3:
-          score = 3;
-          break;
-        default:
-          break;
+
+      if (!this.visited[which].has(curPos.toString())) {
+        this.searchPath.push([curPos]);
+        this.visited[which].add(curPos.toString());
       }
-      break;
-    case 'down':
-      switch (index) {
-        case 0:
-          score = 3;
-          break;
-        case 1:
-          score = 2;
-          break;
-        case 2:
-          score = 1;
-          break;
-        case 3:
-          score = 2;
-          break;
-        default:
-          break;
+
+      if (isFoundEnd) {
+        this.searchPath.push([actualEnd]);
+        break;
       }
-      break;
-    case 'left':
-      switch (index) {
-        case 0:
-          score = 2;
-          break;
-        case 1:
-          score = 3;
-          break;
-        case 2:
-          score = 2;
-          break;
-        case 3:
-          score = 1;
-          break;
-        default:
-          break;
-      }
-      break;
-    default:
-      break;
+    }
+
+    return isFoundEnd ? this.reconstructPath(actualEnd, which) : [];
   }
-  return score;
+
+  determineSearchDirection(which) {
+    if (this.unvisited[0].Length() > 0 && this.unvisited[1].Length() > 0) {
+      return (which + 1) % 2;
+    }
+    return this.unvisited[0].Length() > 0 ? 0 : 1;
+  }
+}
+
+function Dijkstra(startCallback, speed) {
+  const pathfinder = new DijkstraPathfinder(position.start, position.end);
+  const shortestPath = pathfinder.findPath();
+  console.log(pathfinder.retDirection);
+  startCallback(pathfinder.searchPath, shortestPath, pathfinder.retDirection, speed);
 }
 
 export default Dijkstra;

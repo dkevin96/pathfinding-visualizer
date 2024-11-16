@@ -5,7 +5,7 @@ export function UpdateTable(Start, ClearPath, algorithm, speed) {
   ClearPath(false);
   switch (algorithm.get) {
     case 'Algorithm_Dijkstra':
-      Dijkstra('Dijkstra', Start, speed.get[1]);
+      Dijkstra( Start, speed.get[1]);
       break;
     default:
       break;

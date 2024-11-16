@@ -3,7 +3,7 @@ import { Queue } from '../components/core/Queue';
 import { Distance } from '../components/core/Distance';
 import dist from 'javascript-priority-queue';
 
-export function BFS(startCallback, speed) {
+function BFS(startCallback, speed) {
   var retSearchPath = [];
   var retShortestPath = [];
   var retDirection = [];
@@ -76,3 +76,5 @@ export function BFS(startCallback, speed) {
   // console.log(retShortestPath);
   startCallback(retSearchPath, retShortestPath, retDirection, speed);
 }
+
+export default BFS;
