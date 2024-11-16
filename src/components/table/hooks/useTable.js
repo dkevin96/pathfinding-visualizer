@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { componentKind, tableVar } from "../constants/tableConstants";
-import { position } from "../../core/index";
-import Dijkstra from "../../../algorithms/Dijkstra";
-import DFS from "../../../algorithms/DFS";
-import BFS from "../../../algorithms/BFS";
+import { position } from "components/core";
+import Dijkstra from "algorithms/Dijkstra";
+import DFS from "algorithms/DFS";
+import BFS from "algorithms/BFS";
 
 export function useTable() {
   /**

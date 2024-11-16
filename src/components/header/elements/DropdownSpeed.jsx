@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { sysStatusContext } from "../../core/index";
-import { speedContext } from "../../core/index";
+import { sysStatusContext } from "components/core";
+import { speedContext } from "components/core";
 import Colored from "./Colored";
 
 function DropdownSpeed() {

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import Nav from "react-bootstrap/Nav";
-import { sysStatusContext } from "../../core";
+import { sysStatusContext } from "components/core";
 import Colored from "./Colored";
 
 function NavLink(props) {

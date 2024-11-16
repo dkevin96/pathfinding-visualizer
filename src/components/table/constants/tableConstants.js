@@ -1,4 +1,4 @@
-import { ensureOdd } from "../../../misc/helpfunctions";
+import { ensureOdd } from "misc/helpfunctions";
 
 const getObjectHeight = () => {
   return 162 + 100;

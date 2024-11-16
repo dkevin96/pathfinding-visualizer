@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { sysStatusContext } from "../../core/index";
+import { sysStatusContext } from "components/core";
 
 const Colored = () => {
   const sysStatus = useContext(sysStatusContext);

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { tableVar, componentKind, synchronize, originPos, cellType } from "../constants/tableConstants";
 import { touchContext, updateContext } from "../contexts/TableContext";
-import { sysStatusContext, algorithmContext, speedContext, animationStatusContext, position } from "../../core";
+import { sysStatusContext, algorithmContext, speedContext, animationStatusContext, position } from "components/core";
 import { useTable } from "./useTable";
 import { usePathFindingAnimation } from "./usePathFindingAnimation";
 import { useCell } from "./useCell";

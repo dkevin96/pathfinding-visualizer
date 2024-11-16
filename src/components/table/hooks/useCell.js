@@ -1,5 +1,5 @@
 import { tableVar, componentKind, cellType } from "../constants/tableConstants";
-import { position } from "../../core/index";
+import { position } from "components/core";
 
 export function useCell() {
   /**
