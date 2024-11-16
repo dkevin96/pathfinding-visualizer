@@ -54,7 +54,7 @@ export class Distance {
           curX = x - 1;
           curY = y;
           curD = this.dict[[x - 1, y]];
-          dir = 'down';
+          dir = "down";
         }
         visited.add([x - 1, y].toString());
       }
@@ -65,7 +65,7 @@ export class Distance {
           curX = x + 1;
           curY = y;
           curD = this.dict[[x + 1, y]];
-          dir = 'up';
+          dir = "up";
         }
         visited.add([x + 1, y].toString());
       }
@@ -76,7 +76,7 @@ export class Distance {
           curX = x;
           curY = y - 1;
           curD = this.dict[[x, y - 1]];
-          dir = 'right';
+          dir = "right";
         }
         visited.add([x, y - 1].toString());
       }
@@ -87,7 +87,7 @@ export class Distance {
           curX = x;
           curY = y + 1;
           curD = this.dict[[x, y + 1]];
-          dir = 'left';
+          dir = "left";
         }
         visited.add([x, y + 1].toString());
       }

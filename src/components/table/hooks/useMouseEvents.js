@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { sysStatusContext, algorithmContext, speedContext, animationStatusContext } from "components/core";
 import { tableVar, componentKind, synchronize } from "../constants/tableConstants";
 import { touchContext, moveContext, updateContext } from "../contexts/TableContext";
-import { useTable } from "./useTable";  
+import { useTable } from "./useTable";
 import { useCell } from "./useCell";
 import { useButtonEvents } from "./useButtonEvents";
 

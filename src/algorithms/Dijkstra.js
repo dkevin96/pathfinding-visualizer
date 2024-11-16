@@ -1,14 +1,14 @@
-import PriorityQueue from './PriorityQueue';
-import { position } from '../components/core/index';
+import PriorityQueue from "./PriorityQueue";
+import { position } from "../components/core/index";
 
 const DIRECTIONS = {
-  UP: 'up',
-  RIGHT: 'right',
-  DOWN: 'down',
-  LEFT: 'left',
+  UP: "up",
+  RIGHT: "right",
+  DOWN: "down",
+  LEFT: "left",
 };
 
-/* 
+/*
  * Direction scoring system for path movements:
  * - Keys represent current direction (UP, RIGHT, DOWN, LEFT)
  * - Values are costs for turning to each direction (0=UP, 1=RIGHT, 2=DOWN, 3=LEFT)

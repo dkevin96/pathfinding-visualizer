@@ -51,6 +51,6 @@
     "prettier": "^3.3.3"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": "prettier -w -u"
+    "*.{js,jsx,ts,tsx,json,css,scss,md}": "prettier --write"
   }
 }

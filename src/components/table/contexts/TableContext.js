@@ -3,20 +3,20 @@ import { componentKind } from "../constants/tableConstants";
 
 /**
  * Context to track what's underneath start/end nodes during drag operations
- * 
+ *
  * @typedef {Object} TouchState
  * @property {string} start - Component type underneath the start node (e.g., 'wall', 'background')
  * @property {string} end - Component type underneath the end node (e.g., 'wall', 'background')
- * 
+ *
  * @typedef {Object} TouchAction
  * @property {string} componentKind - Which node is being moved ('start' or 'end')
  * @property {string} under - What component is underneath at the new position
- * 
+ *
  * Usage:
  * - When dragging start/end nodes, we need to remember what type of cell was underneath
  * - This allows us to restore the correct cell type when the node is moved away
  * - Example: If you drag start node over a wall, we store 'wall' as the underlying component
- * 
+ *
  * @see useMouseEvents hook for implementation (handleMouseEnter method)
  */
 export const touchContext = createContext();

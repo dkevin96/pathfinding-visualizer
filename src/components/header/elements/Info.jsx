@@ -3,28 +3,28 @@ function Info() {
     <div id="mainInfo">
       <ul>
         <li>
-          {' '}
-          <div className="Info-Start-Node"></div>Start Node{' '}
+          {" "}
+          <div className="Info-Start-Node"></div>Start Node{" "}
         </li>
         <li>
-          {' '}
-          <div className="Info-End-Node"></div>Target Node{' '}
+          {" "}
+          <div className="Info-End-Node"></div>Target Node{" "}
         </li>
         <li>
-          {' '}
-          <div className="Info-Unvisited-Node"></div>Unvisited Node{' '}
+          {" "}
+          <div className="Info-Unvisited-Node"></div>Unvisited Node{" "}
         </li>
         <li>
-          {' '}
-          <div className="Info-Visited-Node"></div>Visited Node{' '}
+          {" "}
+          <div className="Info-Visited-Node"></div>Visited Node{" "}
         </li>
         <li>
-          {' '}
-          <div className="Info-ShortestPathNode-Node"></div>Shortest-Path Node{' '}
+          {" "}
+          <div className="Info-ShortestPathNode-Node"></div>Shortest-Path Node{" "}
         </li>
         <li>
-          {' '}
-          <div className="Info-WallNode-Node"></div>Wall Node{' '}
+          {" "}
+          <div className="Info-WallNode-Node"></div>Wall Node{" "}
         </li>
       </ul>
     </div>
