@@ -1,21 +1,16 @@
-import React, { useContext } from 'react';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import DropdownAlgorithm from './elements/DropdownAlgorithm';
-import NavButton from './elements/NavButton';
-import DropdownSpeed from './elements/DropdownSpeed';
-import Info from './elements/Info';
+import React from "react";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import DropdownAlgorithm from "./elements/DropdownAlgorithm";
+import NavButton from "./elements/NavButton";
+import DropdownSpeed from "./elements/DropdownSpeed";
+import Info from "./elements/Info";
 
-import ButtonEvent from '../../table/tablehelper/ButtonEvent';
-import Colored from './Colored';
-import { sysStatusContext } from '../../core/index';
-import NavLink from './elements/NavLink';
+import { useButtonEvents } from "../../table/hooks/useButtonEvents";
+import NavLink from "./elements/NavLink";
 
 function PC() {
-  const buttonEvent = ButtonEvent();
-  const sysStatus = useContext(sysStatusContext);
-  const [className, toggleHandler] = Colored();
-
+  const { clearPath, clearWalls, clearBoard } = useButtonEvents();
   return (
     <>
       <Navbar collapseOnSelect expand="md" className="navbar">
@@ -24,9 +19,9 @@ function PC() {
           <Nav className="nav-bar">
             <DropdownAlgorithm />
             <NavButton />
-            <NavLink names={'Clear Board'} handlers={buttonEvent.ClearBoard} />
-            <NavLink names={'Clear Walls'} handlers={buttonEvent.ClearWalls} />
-            <NavLink names={'Clear Path'} handlers={buttonEvent.ClearPath} />
+            <NavLink names={"Reset Board"} handlers={clearBoard} />
+            <NavLink names={"Clear Walls"} handlers={clearWalls} />
+            <NavLink names={"Clear Path"} handlers={clearPath} />
             <DropdownSpeed />
           </Nav>
         </Navbar.Collapse>

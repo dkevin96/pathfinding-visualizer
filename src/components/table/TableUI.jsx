@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import MouseEvent from './MouseEvent';
-import { tableVar, componentKind, originPos } from './TableIndex';
+import { useEffect } from "react";
+import useMouseEvents from "./hooks/useMouseEvents";
+import { tableVar, componentKind, originPos } from "./constants/tableConstants";
 
 function TableUI() {
   const [rowSize, colSize, size] = [tableVar.rowSize, tableVar.colSize, tableVar.size];
@@ -8,12 +8,8 @@ function TableUI() {
   const row = Array.from(Array(rowSize).keys());
   const col = Array.from(Array(colSize).keys());
 
-  const mouseEvent = MouseEvent();
-  const [MouseDownHandler, MouseUpHandler, OnMouseEnterHanlder] = [
-    mouseEvent.MouseDownHandler,
-    mouseEvent.MouseUpHandler,
-    mouseEvent.OnMouseEnterHanlder,
-  ];
+  // Updated to use the new hook naming
+  const { handleMouseDown, handleMouseUp, handleMouseEnter } = useMouseEvents();
 
   const createTable = row.map((rowIndex, index) => {
     return (
@@ -25,9 +21,9 @@ function TableUI() {
               key={index}
               className={componentKind.background}
               width={size}
-              onMouseUp={MouseUpHandler}
-              onMouseDown={MouseDownHandler}
-              onMouseEnter={OnMouseEnterHanlder}
+              onMouseUp={handleMouseUp}
+              onMouseDown={handleMouseDown}
+              onMouseEnter={handleMouseEnter}
             >
               {}
             </td>

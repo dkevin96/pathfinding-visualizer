@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import Nav from "react-bootstrap/Nav";
 
 import { algorithmContext, sysStatusContext, speedContext, animationStatusContext } from "../../../core/index";
-import ButtonEvent from "../../../table/tablehelper/ButtonEvent";
-import { stopStatus } from "../../../table/tablehelper/Animation";
+import { usePathFindingAnimation } from "../../../table/hooks/usePathFindingAnimation";
+import { useButtonEvents } from "../../../table/hooks/useButtonEvents";
 import Dijkstra from "../../../../algorithms/Dijkstra";
 import DFS from "../../../../algorithms/DFS";
 import BFS from "../../../../algorithms/BFS";
@@ -15,8 +15,8 @@ const NavButton = () => {
   const sysStatus = useContext(sysStatusContext);
   const animationStatus = useContext(animationStatusContext);
   const speed = useContext(speedContext);
-  const animation = useContext(animationStatusContext);
-  const buttonEvent = ButtonEvent();
+  const { clearPath, start: startPath } = useButtonEvents();
+  const { pathFindingState: stopStatus } = usePathFindingAnimation();
 
   useEffect(() => {
     setMyVariant("buttonEnable");
@@ -40,8 +40,6 @@ const NavButton = () => {
           name = "";
           break;
       }
-    } else if (animationStatus.get === "Maze") {
-      name = "Maze";
     }
     setButtonName(`Visualize ${name}!`);
   }, [algoContext.get, animationStatus.get]);
@@ -63,11 +61,11 @@ const NavButton = () => {
   const handler = () => {
     //Change system state
     if (sysStatus.get === "RUNNING") {
-      buttonEvent.Start(); // Pause status changes within this function
+      startPath(); // Pause status changes within this function
       return;
     } else if (sysStatus.get === "STOP") {
       if (algoContext.get === stopStatus.algorithm) {
-        buttonEvent.Start();
+        startPath();
         return;
       }
     }
@@ -76,18 +74,18 @@ const NavButton = () => {
       setButtonName("Pick an Algorithm");
     } else {
       callback(
-        () => buttonEvent.ClearPath(),
+        () => clearPath(),
         () => {
           switch (algoContext.get) {
             case "Algorithm_Dijkstra":
-              Dijkstra( buttonEvent.Start, speed.get[1]);
+              Dijkstra(startPath, speed.get[1]);
               break;
             case "Algorithm_Depth_First":
-              DFS(buttonEvent.Start, speed.get[1]);
+              DFS(startPath, speed.get[1]);
               break;
             case "Algorithm_Breadth_First":
               console.log("Staring Bfs");
-              BFS(buttonEvent.Start, speed.get[1]);
+              BFS(startPath, speed.get[1]);
               break;
             default:
               break;
