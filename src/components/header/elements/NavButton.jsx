@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import Nav from "react-bootstrap/Nav";
 
-import { algorithmContext, sysStatusContext, speedContext, animationStatusContext } from "../../../core/index";
-import { usePathFindingAnimation } from "../../../table/hooks/usePathFindingAnimation";
-import { useButtonEvents } from "../../../table/hooks/useButtonEvents";
-import Dijkstra from "../../../../algorithms/Dijkstra";
-import DFS from "../../../../algorithms/DFS";
-import BFS from "../../../../algorithms/BFS";
+import { algorithmContext, sysStatusContext, speedContext, animationStatusContext } from "../../core/index";
+import { usePathFindingAnimation } from "../../table/hooks/usePathFindingAnimation";
+import { useButtonEvents } from "../../table/hooks/useButtonEvents";
+import Dijkstra from "../../../algorithms/Dijkstra";
+import DFS from "../../../algorithms/DFS";
+import BFS from "../../../algorithms/BFS";
 
 const NavButton = () => {
   const [buttonName, setButtonName] = useState("Visualize !");

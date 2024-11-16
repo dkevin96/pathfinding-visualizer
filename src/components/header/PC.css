@@ -79,11 +79,11 @@
 }
 
 .Info-Start-Node {
-  background-image: url('../../../../Resources/Images/Info/StartNode.png');
+  background-image: url('../../Resources/Images/Info/StartNode.png');
 }
 
 .Info-End-Node {
-  background-image: url('../../../../Resources/Images/Info/EndNode.png');
+  background-image: url('../../Resources/Images/Info/EndNode.png');
 }
 
 .Info-Unvisited-Node {
@@ -92,15 +92,15 @@
 }
 
 .Info-Visited-Node {
-  background-image: url('../../../../Resources/Images/Info/VisitedNode1.png');
+  background-image: url('../../Resources/Images/Info/VisitedNode1.png');
 }
 
 .Info-ShortestPathNode-Node {
-  background-image: url('../../../../Resources/Images/Info/ShortestPathNode.png');
+  background-image: url('../../Resources/Images/Info/ShortestPathNode.png');
 }
 
 .Info-WallNode-Node {
-  background-image: url('../../../../Resources/Images/Info/WallNode.png');
+  background-image: url('../../Resources/Images/Info/WallNode.png');
 }
 
 #algorithmDescriptor {

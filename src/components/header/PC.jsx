@@ -6,7 +6,7 @@ import NavButton from "./elements/NavButton";
 import DropdownSpeed from "./elements/DropdownSpeed";
 import Info from "./elements/Info";
 
-import { useButtonEvents } from "../../table/hooks/useButtonEvents";
+import { useButtonEvents } from "../table/hooks/useButtonEvents";
 import NavLink from "./elements/NavLink";
 
 function PC() {

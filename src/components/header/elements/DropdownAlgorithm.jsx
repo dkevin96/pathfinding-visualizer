@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { NavDropdown, Nav } from "react-bootstrap";
-import { algorithmContext, sysStatusContext } from "../../../core/index";
-import Colored from "../../headerhelper/Colored";
-import { useButtonEvents } from "../../../table/hooks/useButtonEvents";
+import { algorithmContext, sysStatusContext } from "../../core/index";
+import Colored from "./Colored";
+import { useButtonEvents } from "../../table/hooks/useButtonEvents";
 
 function DropdownAlgorithm() {
   const algoContext = useContext(algorithmContext);

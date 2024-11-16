@@ -1,5 +1,5 @@
 import { position } from '../components/core/index';
-import { Queue } from '../components/core/Queue';
+import { Queue } from './Queue';
 import { Distance } from '../components/core/Distance';
 import dist from 'javascript-priority-queue';
 

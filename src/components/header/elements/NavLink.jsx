@@ -1,14 +1,14 @@
-import React, { useState, useContext } from 'react';
-import Nav from 'react-bootstrap/Nav';
-import { sysStatusContext } from '../../../core';
-import Colored from '../Colored';
+import React, { useState, useContext } from "react";
+import Nav from "react-bootstrap/Nav";
+import { sysStatusContext } from "../../core";
+import Colored from "./Colored";
 
 function NavLink(props) {
   const sysStatus = useContext(sysStatusContext);
   const [className, toggleHandler] = Colored();
 
   const onClick = () => {
-    if (sysStatus.get !== 'IDLE' && sysStatus.get !== 'STOP') {
+    if (sysStatus.get !== "IDLE" && sysStatus.get !== "STOP") {
       return;
     }
     props.handlers();
