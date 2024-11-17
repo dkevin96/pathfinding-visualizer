@@ -28,7 +28,7 @@ class PriorityQueue {
    * Adds a new node to the priority queue and maintains the min-heap property.
    *
    * @param {number} score - Total path cost to reach this node
-   * @param {number} heuristic - Manhattan distance to end point (used as tiebreaker)
+   * @param {number} heuristic - Manhattan distance to end point, used for A* pathfinding, for Dijkstra, it is not used
    * @param {Array<number>} pos - Position coordinates [row, col]
    *
    * Implementation:

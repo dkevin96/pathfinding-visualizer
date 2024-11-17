@@ -1,7 +1,6 @@
 import { position } from "../components/core/index";
 import { Queue } from "./Queue";
 import { Distance } from "../components/core/Distance";
-import dist from "javascript-priority-queue";
 
 function BFS(startCallback, speed) {
   var retSearchPath = [];
