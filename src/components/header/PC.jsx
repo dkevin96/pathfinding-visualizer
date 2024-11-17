@@ -5,7 +5,7 @@ import DropdownAlgorithm from "./elements/DropdownAlgorithm";
 import NavButton from "./elements/NavButton";
 import DropdownSpeed from "./elements/DropdownSpeed";
 import Info from "./elements/Info";
-
+import AlgorithmDescriptor from "./elements/AlgorithmDescriptor";
 import { useButtonEvents } from "../table/hooks/useButtonEvents";
 import NavLink from "./elements/NavLink";
 
@@ -27,6 +27,7 @@ function PC() {
         </Navbar.Collapse>
       </Navbar>
       <Info />
+      <AlgorithmDescriptor />
     </>
   );
 }

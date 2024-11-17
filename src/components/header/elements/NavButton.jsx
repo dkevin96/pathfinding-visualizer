@@ -84,7 +84,6 @@ const NavButton = () => {
               DFS(startPath, speed.get[1]);
               break;
             case "Algorithm_Breadth_First":
-              console.log("Staring Bfs");
               BFS(startPath, speed.get[1]);
               break;
             default:

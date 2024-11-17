@@ -104,6 +104,17 @@ export function usePathFindingAnimation() {
    * @param {number} speed - Animation speed in milliseconds
    * @param {Function} sysStatusFunction - Callback for system status updates
    * @param {Function} updateFunction - Callback to update UI after animation
+   *
+   * Animation Resume Logic Example:
+   * If animation was paused at:
+   * pathFindingState.current.searchStop = [5, 3]  // Level 5, cell 3
+   *
+   * When resuming:
+   * - If count = 5 (same level as pause)
+   *   (5 === 5) * 3 = true * 3 = 3  // Start from cell 3
+   *
+   * - If count = 6 (next level)
+   *   (6 === 5) * 3 = false * 3 = 0  // Start from beginning
    */
   const handleSearchAnimation = useCallback(
     (search, path, pathDirection, speed, sysStatusFunction, updateFunction) => {

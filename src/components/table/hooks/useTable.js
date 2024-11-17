@@ -70,7 +70,6 @@ export function useTable() {
         DFS(Start, speed.get[1]);
         break;
       case "Algorithm_Breadth_First":
-        console.log("Staring Bfs");
         BFS(Start, speed.get[1]);
         break;
       default:
